@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+{% block tabs %}{% endblock %}
+{% block content %}
+    {{ super() }}
+    <ol>
+        {%- for page in config.nav -%}
+        <li>{{ page }}</li>
+        {%- endfor -%}
+    </ol>
+
+    <output>Fetching the latest statuses...</output>
+    <template>
+        <table>
+            <thead>
+                <tr>
+                    <th>MIP N<sup>o</sup></th>
+                    <th>Date Proposed</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </template> 
+
+    <script src="/overrides/assets/js/jquery.min.js"></script>
+    <script src="/overrides/assets/js/status.js"></script>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,193 @@
+# Project information
+site_name: Maker Improvement Proposals
+site_description: Governing better money
+site_author: Andy Tudhope
+
+# Specific to set up
+site_url: https://andytudhope.github.io/mips/
+
+# Repository
+repo_name: makerdao/mips
+repo_url: https://github.com/makerdao/mips
+edit_uri: ""
+
+extra_css: [extra.css]
+
+# Configuration
+theme:
+  name: null
+  custom_dir: material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - tabs
+    #- instant
+  palette:
+    primary: black
+    accent: lime
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: logo
+  favicon: assets/favicon.png
+
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/makerdao
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/MakerDAO
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.twemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  # - pymdownx.highlight:
+  #     linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: andytudhope
+      repo: mips
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.extra
+  
+
+# Page tree
+nav:
+  - Home: index.md
+  - Accepted:
+    - Active MIPs: 
+      - 'Overview': 'accepted/index.md'
+      - 'MIP 0': 'accepted/mips/mip0.md'
+      - 'MIP 1': 'accepted/mips/mip1.md'
+      - 'MIP 2': 'accepted/mips/mip2.md'
+      - 'MIP 3': 'accepted/mips/mip3.md'
+      - 'MIP 4': 'accepted/mips/mip4.md'
+      - 'MIP 5': 'accepted/mips/mip5.md'
+      - 'MIP 6': 'accepted/mips/mip6.md'
+      - 'MIP 7': 'accepted/mips/mip7.md'
+      - 'MIP 8': 'accepted/mips/mip8.md'
+      - 'MIP 9': 'accepted/mips/mip9.md'
+      - 'MIP 10': 'accepted/mips/mip10.md'
+      - 'MIP 11': 'accepted/mips/mip11.md'
+      - 'MIP 12': 'accepted/mips/mip12.md'
+    - Active Sub-proposals:
+      - 'Overview': 'accepted/subproposals/index.md'
+      - MIP0:
+        - 'Onboard MIP Editor': 'accepted/subproposals/MIP0/MIP0c12-SP1.md'
+      - MIP1:
+        - 'Placeholder': 'accepted/subproposals/MIP1/placeholder.md'
+      - MIP3:
+        - 'Placeholder': 'accepted/subproposals/MIP3/placeholder.md'
+      - MIP4:
+        - 'Placeholder': 'accepted/subproposals/MIP4/placeholder.md'
+      - MIP6:
+        - 'Placeholder': 'accepted/subproposals/MIP6/placeholder.md'
+      - MIP7:
+        - 'Onboard Domain Team': 'accepted/subproposals/MIP7/MIP7c3-SP1.md'
+      - MIP10:
+        - 'Placeholder': 'accepted/subproposals/MIP10/placeholder.md'
+      - MIP11:
+        - 'Placeholder': 'accepted/subproposals/MIP11/placeholder.md'
+      - MIP12:
+        - 'Placeholder': 'accepted/subproposals/MIP12/placeholder.md'
+    - Active Collateral:
+      - 'Overview': 'accepted/collateral/index.md'
+  - Process:
+    - 'Overview': 'process/index.md'
+    - 'Lifecycle': 'process/lifecycle.md'
+  - Submit:
+    - 'Introduction': 'submit/index.md'
+    - MIP Templates:
+      - 'General': 'submit/templates/General-MIP-Template.md'
+      - 'Technical': 'submit/templates/Technical-MIP-Template.md'
+    - Subproposal Templates:
+      - MIP0:
+        - 'MIP0c12': 'submit/MIP0/MIP0c12-Subproposal-Template.md'
+        - 'MIP0c13': 'submit/MIP0/MIP0c13-Subproposal-Template.md'
+      - MIP1:
+        - 'MIP1c4': 'submit/MIP1/MIP1c4-Subproposal-Template.md'
+      - MIP3:
+        - 'MIP3c2': 'submit/MIP3/MIP3c2-Subproposal-Template.md'
+      - MIP4:
+        - 'MIP4c2': 'submit/MIP4/MIP4c2-Subproposal-Template.md'
+        - 'MIP4c3': 'submit/MIP4/MIP4c3-Subproposal-Template.md'
+      - MIP6:
+        - 'MIP6c3': 'submit/MIP6/MIP6c3-Subproposal-Template.md'
+      - MIP7:
+        - 'MIP7c3': 'submit/MIP7/MIP7c3-Subproposal-Template.md'
+        - 'MIP7c4': 'submit/MIP7/MIP7c4-Subproposal-Template.md'
+      - MIP10:
+        - 'MIP10c2': 'submit/MIP10/MIP10c2-Subproposal-Template.md'
+        - 'MIP10c3': 'submit/MIP10/MIP10c3-Subproposal-Template.md'
+        - 'MIP10c4': 'submit/MIP10/MIP10c4-Subproposal-Template.md'
+        - 'MIP10c5': 'submit/MIP10/MIP10c5-Subproposal-Template.md'
+        - 'MIP10c6': 'submit/MIP10/MIP10c6-Subproposal-Template.md'
+        - 'MIP10c7': 'submit/MIP10/MIP10c7-Subproposal-Template.md'
+        - 'MIP10c8': 'submit/MIP10/MIP10c8-Subproposal-Template.md'
+        - 'MIP10c9': 'submit/MIP10/MIP10c9-Subproposal-Template.md'
+        - 'MIP10c10': 'submit/MIP10/MIP10c10-Subproposal-Template.md'
+        - 'MIP10c11': 'submit/MIP10/MIP10c11-Subproposal-Template.md'
+        - 'MIP10c12': 'submit/MIP10/MIP10c12-Subproposal-Template.md'
+        - 'MIP10c13': 'submit/MIP10/MIP10c13-Subproposal-Template.md'
+        - 'MIP10c14': 'submit/MIP10/MIP10c14-Subproposal-Template.md'
+        - 'MIP10c15': 'submit/MIP10/MIP10c15-Subproposal-Template.md'
+        - 'MIP10c16': 'submit/MIP10/MIP10c16-Subproposal-Template.md'
+        - 'MIP10c17': 'submit/MIP10/MIP10c17-List-of-Feeds.md'
+        - 'MIP10c18': 'submit/MIP10/MIP10c18-Subproposal-Template.md'
+      - MIP11:
+        - 'MIP11c3': 'submit/MIP11/MIP11c3-Subproposal-Template.md'
+        - 'MIP11c4': 'submit/MIP11/MIP11c4-Subproposal-Template.md'
+      - MIP12:
+        - 'MIP12c2': 'submit/MIP12/MIP12c2-Subproposal-Template.md' 
+  - Review:
+    - 'Overview': 'review/index.md'
+    - Current:
+      - 'Overview': 'review/current/index.md'
+    - Rejected:
+      - 'Overview': 'review/rejected/index.md' 
+  - Collateral Onboarding:
+    - 'Guide': 'review/collateral/index.md'
+    - 'Template': 'review/collateral/template.md'
