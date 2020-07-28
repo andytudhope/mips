@@ -1,9 +1,9 @@
-//** @jsx jsx */
-import React from "react";
+/** @jsx jsx */
+import {Children} from 'react';
 import { Box, Flex, jsx } from "theme-ui";
 
 const Checklist = ({ children }) => {
-  const _Children = React.Children.toArray(children);
+  const _Children = Children.toArray(children);
 
   return (
     <Flex
@@ -14,7 +14,7 @@ const Checklist = ({ children }) => {
         mb: "24px",
         flexDirection: "column",
         border: "1px solid",
-        borderColor: "strokeFaded",
+        borderColor: "muted",
         bg: "background",
         borderRadius: "4px",
       }}
@@ -22,7 +22,8 @@ const Checklist = ({ children }) => {
       {_Children.map((child, index) => (
         <Flex
           as="li"
-          sx={{ mb: "24px", color: "body", "&:last-of-type": { mb: 0 } }}
+          key={`checklist-child-${index}`}
+          sx={{ mb: "24px", color: "text", "&:last-of-type": { mb: 0 } }}
         >
           <Box
             sx={{
@@ -31,7 +32,7 @@ const Checklist = ({ children }) => {
               bg: "background",
               borderRadius: "4px",
               border: "1px solid",
-              borderColor: "body",
+              borderColor: "text",
               mr: "14px",
             }}
           ></Box>

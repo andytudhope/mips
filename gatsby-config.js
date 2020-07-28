@@ -9,12 +9,19 @@ require("dotenv").config();
 
 module.exports = {
   siteMetadata: {
-    title: `MakerDAO Improvement Proposals`,
-    description: `Governing Better Money`,
-    author: `Réjon Taylor-Foster (@Maximum_Crash) and Andy Tudhope`,
+    title: `MakerDAO Community Portal`,
+    description: `A Community of developers, designers, innovators, and just about everything cool under the sun. Come join our team!`,
+    author: `MakerDAO Commuminty Development Team`,
     copyright: "",
+    siteUrl: "http://localhost:9000", // NOTE(Isaac): TODO: change this to production URL
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-theme-ui',
+      options: {
+        preset: "@makerdao/dai-ui-theme-maker"
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,25 +30,56 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-plugin-page-creator",
       options: {
-        name: `images`,
-        path: `${__dirname}/content/images`,
+        path: `${__dirname}/content`,
+        ignore: {
+          patterns: [
+            `**/header.mdx`,
+            `**/**.js`,
+            `**/**.json`,
+            `**/404.mdx`,
+            `**/example.mdx`,
+            `**/footer.mdx`,
+            `**/**.pptx`,
+          ],
+          options: { nocase: true },
+        },
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-nprogress`,
       options: {
-        name: `imgs`,
-        path: `./src/imgs`,
+        // Setting a color is optional.
+        color: `#5AE2CA`,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              edges {
+                node {
+                  path
+                }
+              }
+            }
+        }`,
       },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-transformer-json`,
     `gatsby-plugin-sharp`,
-    `gatsby-remark-responsive-iframe`,
-    "gatsby-remark-embed-video",
     `gatsby-remark-images`,
     {
       resolve: `gatsby-plugin-mdx`,
@@ -62,16 +100,13 @@ module.exports = {
               showInfo: false, // Optional: Hides video title and player actions.
             },
           },
+
           `gatsby-remark-responsive-iframe`,
           {
             resolve: `gatsby-remark-images`,
             options: {
-              backgroundColor: "none",
-              disableBgImage: true,
-              showCaptions: ["Title"],
               maxWidth: 1000,
               linkImagesToOriginal: false,
-              wrapperStyle: (result) => `margin: unset;`,
             },
           },
           {
@@ -83,53 +118,7 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Gatsby + Dai-Ui Starter`,
-        short_name: `Gatsby + Dai-Ui`,
-        start_url: `/`,
-        display: `minimal-ui`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: "gatsby-plugin-theme-ui",
-      options: {
-        prismPreset: "night-owl",
-        preset: "@makerdao/dai-ui-theme-maker",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: ["Roboto Mono"],
-        display: "swap",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`./src/modules/layouts/site_layout.js`),
-      },
-    },
-    {
-      resolve: "gatsby-plugin-page-creator",
-      options: {
-        path: `${__dirname}/content`,
-        ignore: {
-          patterns: [
-            `**/header.mdx`,
-            `**/**.js`,
-            `**/**.json`,
-            `**/404.mdx`,
-            `**/example.mdx`,
-            `**/footer.mdx`
-          ],
-          options: { nocase: true },
-        },
-      },
-    },
-    
+
     {
       //NOTE(Rejon): This is what allows us to do aliased imports like "@modules/ect..."
       resolve: `gatsby-plugin-alias-imports`,
@@ -139,7 +128,7 @@ module.exports = {
           "@src": path.resolve(__dirname, "src"),
           "@utils": path.resolve(__dirname, "src/utils.js"),
           "@pages": path.resolve(__dirname, "src/pages"),
-          "@images": path.resolve(__dirname, "public/images"),
+          "@images": path.resolve(__dirname, "static/images"),
           "@content": path.resolve(__dirname, "content"),
         },
         extensions: [
@@ -159,7 +148,7 @@ module.exports = {
               node.frontmatter !== undefined &&
               node.fileAbsolutePath &&
               node.fileAbsolutePath.match(
-                /\/en\/(?!header.mdx|footer.mdx|index.mdx|example.mdx|404.mdx|.js|.json)/
+                /\/en\/(?!header.mdx|footer.mdx|index.mdx|example.mdx|social.mdx|404.mdx|.js|.json)/
               ) !== null,
           },
           {
@@ -168,7 +157,7 @@ module.exports = {
               node.frontmatter !== undefined &&
               node.fileAbsolutePath &&
               node.fileAbsolutePath.match(
-                /\/es\/(?!header.mdx|footer.mdx|index.mdx|example.mdx|404.mdx|.js|.json)/
+                /\/es\/(?!header.mdx|footer.mdx|index.mdx|example.mdx|social.mdx|404.mdx|.js|.json)/
               ) !== null,
           },
         ],
@@ -184,7 +173,7 @@ module.exports = {
             title: TitleConverter,
             url: UrlConverter,
             excerpt: (node) => {
-              const excerptLength = 64; // Hard coded excerpt length
+              const excerptLength = 90; // Hard coded excerpt length
 
               //If this node's frontmatter has a description use THAT for excerpts.
               if (node.frontmatter.description) {
@@ -243,11 +232,34 @@ module.exports = {
         // cookieDomain: "makerdao.com",
       },
     },
-
+    "gatsby-plugin-preload-link-crossorigin",
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `MakerDAO Community Portal`,
+        short_name: `MKD Comm Portal`,
+        start_url: `/`,
+        background_color: "#291a42",
+        theme_color: "#5AE2CA",
+        display: `standalone`,
+        include_favicon: false,
+        icon: "src/modules/utility/icon-512x512.png",
+        cache_busting_mode: "none",
+        theme_color_in_head: false,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+
     `gatsby-plugin-client-side-redirect`, //<- NOTE(Rejon): We're only using this because we're using Github Pages. If we're on vercel or netlify just use their redirect scripts.
-    `gatsby-plugin-catch-links`
+    `gatsby-plugin-catch-links`,
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
+        workboxConfig: {
+          globPatterns: ["**/images/icons/icon-512x512.png"],
+        },
+      },
+    },
   ],
 };

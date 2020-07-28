@@ -1,16 +1,15 @@
 /** @jsx jsx */
-import React from "react";
-
+import {Fragment} from 'react';
 import { Link as GatsbyLink } from "gatsby";
-import {useTranslation} from "@modules/localization";
 import { jsx, Link as ThemeLink } from "theme-ui";
 import { Icon } from "@makerdao/dai-ui-icons";
-import { OutboundLink } from 'gatsby-plugin-google-analytics';
-import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import { OutboundLink } from "gatsby-plugin-google-analytics";
+import { trackCustomEvent } from "gatsby-plugin-google-analytics";
+
+import { useTranslation } from "@modules/localization";
 
 // Since DOM elements <a> cannot receive activeClassName
-// and partiallyActive, destructure the prop here and
-// pass it only to GatsbyLink
+// and partiallyActive, destructure the prop here and // pass it only to GatsbyLink
 const Link = ({
   children,
   to,
@@ -23,6 +22,7 @@ const Link = ({
   mdxType,
   href,
   gaProps,
+  isButton,
   ...other
 }) => {
   const { locale } = useTranslation();
@@ -54,34 +54,34 @@ const Link = ({
         partiallyActive={
           partiallyActive || (linkHref !== `/${locale}/` ? true : null)
         }
-        onClick={e => {
-          const eventProps = Object.assign({
-            category: "Internal Link",
-            action: 'Click',
-            label: linkHref
-          }, gaProps);
+        onClick={(e) => {
+          const eventProps = Object.assign(
+            {
+              category: "Internal Link",
+              action: "Click",
+              label: linkHref,
+            },
+            gaProps
+          );
 
           trackCustomEvent(eventProps);
         }}
         sx={{
-          color: !linkHref ? "bear" : "primary",
-          textDecoration: !linkHref ? "line-through" : "none",
-          textShadow: (theme) =>
-            !linkHref
-              ? `0px 0px 10px ${theme.colors.bear}, 1px 1px 5px ${theme.colors.warning}`
-              : "none",
-          border: !linkHref ? "4px dashed red" : "",
-          cursor: !linkHref ? "not-allowed" : "pointer",
+          color: "link",
+          cursor: "pointer",
+          fontWeight: "600",
+          textDecoration: isButton && "none",
           pointerEvents: disabled ? "none" : "initial",
           transition: "all .1s ease",
           "&.active": {
-            color: !linkHref ? "bear" : "primary",
+            color: "linkAlt",
+            fontWeight: "600",
           },
           "&:hover": {
-            color: !linkHref ? "bear" : "primary",
+            color: "linkAlt",
           },
           "&:hover > svg": {
-            color: !linkHref ? "bear" : "primary",
+            color: "linkAlt",
           },
           "& > *": {
             display: "inline-block",
@@ -91,17 +91,19 @@ const Link = ({
       >
         {/*add space as workaround for svg padding resizing issue*/}
         {icon && linkHref && (
-          <>{` ${(
-            <Icon
-              name={icon}
-              size={"2rem"}
-              sx={{
-                verticalAlign: "middle",
-                top: "-2px",
-                position: "relative",
-              }}
-            />
-          )}`}</>
+          <Fragment>
+            {` ${(
+              <Icon
+                name={icon}
+                size={"2rem"}
+                sx={{
+                  verticalAlign: "middle",
+                  top: "-2px",
+                  position: "relative",
+                }}
+              />
+            )}`}
+          </Fragment>
         )}
         {children}
       </GatsbyLink>
@@ -120,30 +122,27 @@ const Link = ({
 
   return (
     <ThemeLink
-      href={!disabled ? linkHref : ""}
+      href={!disabled ? linkHref : "#"}
       as={OutboundLink}
-      eventCategory={gaProps ? gaProps['category'] : null}
-      eventAction={gaProps ? gaProps['action'] : null}
-      eventLabel={gaProps ? gaProps['label'] : null}
-      eventValue={gaProps ? gaProps['value'] : null}
+      eventCategory={gaProps ? gaProps["category"] : null}
+      eventAction={gaProps ? gaProps["action"] : null}
+      eventLabel={gaProps ? gaProps["label"] : null}
+      eventValue={gaProps ? gaProps["value"] : null}
       sx={{
         pointerEvents: disabled ? "none" : "initial",
         transition: "all .1s ease",
-        textDecoration: !linkHref ? "line-through " : "none",
-        textShadow: (theme) =>
-          !linkHref
-            ? `0px 0px 10px ${theme.colors.bear}, 1px 1px 5px ${theme.colors.warning}`
-            : "none",
-        border: !linkHref ? "4px dashed red" : "",
-        color: !linkHref ? "bear" : "primary",
-        "&.active,": {
-          color: !linkHref ? "bear" : "primary",
+        color: "link",
+        fontWeight: "600",
+        textDecoration: isButton && "none",
+        "&.active": {
+          color: "linkAlt",
+          fontWeight: "600",
         },
         "&:hover": {
-          color: !linkHref ? "bear" : "primary",
+          color: "linkAlt",
         },
         "&:hover > svg": {
-          color: !linkHref ? "bear" : "primary",
+          color: "linkAlt",
         },
         "& > *": {
           display: "inline-block",
@@ -151,18 +150,18 @@ const Link = ({
       }}
       className="external-link"
       {...other}
-      target="_blank"
-      rel="nofollow noopener noreferrer"
+      target={!disabled && "_blank"}
+      rel="nofollow noopener"
     >
       {icon && linkHref && (
-        <>
+        <Fragment>
           {` `}
           <Icon
             name={icon}
             size={"2rem"}
             sx={{ verticalAlign: "middle", top: "-2px", position: "relative" }}
           />
-        </>
+        </Fragment>
       )}
       {children}
       {!hideExternalIcon && (

@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "andytudhope",
+      "name": "Andy Tudhope",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13001517?s=460&u=a3a2d51b0cedef8ebc261e39489bfd8ddf2e3717&v=4",
+      "profile": "https://andytudhope.africa",
+      "contributions": [
+        "code",
+        "design",
+        "example"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "community-portal",
+  "projectOwner": "makerdao",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

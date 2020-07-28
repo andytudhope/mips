@@ -1,35 +1,35 @@
-//** @jsx jsx */
-
-import React from "react";
+/** @jsx jsx */
 import PropTypes from "prop-types";
-import { MDXProvider } from "@mdx-js/react";
 import { Flex, jsx } from "theme-ui";
 
-import {Header, Footer} from "@modules/navigation";
-import {shortcodes} from "@modules/ui";
-import {TranslationProvider} from '@modules/localization'
-
-import "./prismjs.css"; //<- Load in Prismjs css. Our custom styles have to be loaded this way cause Prismjs is blackboxed from our own code.
+import { Header, Footer } from "@modules/navigation";
 
 const Layout = ({ children }) => (
-  <TranslationProvider>
-    <Header />
     <Flex
-      as="main"
       sx={{
-        maxWidth: "1364px",
-        m: "0 auto",
-        mt: "10px",
-        pl: 4,
-        pr: 0,
-        position: "relative",
+        flexDirection: "column",
+        minHeight: "100vh",
+        height: "100%",
       }}
-      className="content-boundary"
     >
-      <MDXProvider components={shortcodes}>{children}</MDXProvider>
+      <Header />
+      <Flex
+        as="main"
+        sx={{
+          maxWidth: "1364px",
+          flex: "1 0 auto",
+          width: "100%",
+          m: "0 auto",
+          pr: 0,
+          pt: ["90px", "90px", "unset"],
+          position: "relative",
+        }}
+        className="content-boundary"
+      >
+        {children}
+      </Flex>
+      <Footer />
     </Flex>
-    <Footer />
-  </TranslationProvider>
 );
 
 Layout.propTypes = {

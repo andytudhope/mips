@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import React from "react";
+import {Children} from 'react';
 import { jsx, Flex, Grid } from "theme-ui";
 
 const Categories = ({ children, minBoxSize = "321px" }) => {
-  const _Children = React.Children.toArray(children);
+  const _Children = Children.toArray(children);
 
   const childElementStyles = {
     position: "relative",
     alignItems: "center",
     minHeight: "260px",
     border: "1px solid",
-    borderColor: "strokeFaded",
+    borderColor: "muted",
     bg: "background",
-    "& > * > div": { color: "body", mb: "9px" },
+    "& > * > div": { color: "text", mb: "9px" },
     padding: "19px 33px",
     borderRadius: "4px",
     "& > * > div:nth-of-type(2) > a, & > * > div:nth-of-type(3) > a": {
@@ -22,6 +22,7 @@ const Categories = ({ children, minBoxSize = "321px" }) => {
     "& > * > .statusBanner:first-of-type": {
       position: "absolute",
       maxWidth: "65.29%",
+      color: "background",
       right: "16px",
       top: "16px",
       width: "auto",
